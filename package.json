@@ -1,0 +1,30 @@
+{
+  "name": "16-stu_mock-fs",
+  "version": "1.0.0",
+  "description": "Team Profile generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.9.0"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/StyngerBee/teamprofilegeneratorfordummies.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/StyngerBee/teamprofilegeneratorfordummies/issues"
+  },
+  "homepage": "https://github.com/StyngerBee/teamprofilegeneratorfordummies#readme",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  }
+}
