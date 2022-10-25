@@ -13,7 +13,8 @@ describe('Employee', () => {
             const name = 'Curran';
             const id = '508';
             const email = 'test@test.com';
-
+            
+            const employee = new Employee(name,id,email)
             const obj = new Employee(name, id, email);
 
             expect(obj.name).toEqual(name);
@@ -59,6 +60,6 @@ describe('Employee', () => {
             const newRole = new Employee().getRole();
 
             expect(role).toEqual(newRole);
-        })
-    })
+        });
+    });
 });
