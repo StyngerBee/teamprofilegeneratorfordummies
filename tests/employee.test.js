@@ -1,6 +1,9 @@
+// pulls employee class from classes files
 const Employee = require('../lib/employee.classes');
 
+// begins testing entire suite
 describe('Employee', () => {
+    // tests individual method, constructor method
     describe('constructor', () =>{
         it('should return an object with three values when called with new keyword', () => {
             const obj = new Employee();
@@ -22,7 +25,7 @@ describe('Employee', () => {
             expect(obj.email).toEqual(email);
         });
     });
-
+    // tests individual method, getName
     describe('getName', () => {
         it('should return employee name', () => {
             const name = 'Curran';
@@ -32,7 +35,7 @@ describe('Employee', () => {
             expect(name).toEqual(newName);
         });
     });
-
+    // tests individual method, getId
     describe('getId', () => {
         it('should return an employee id', () => {
             const id = '508';
@@ -42,7 +45,7 @@ describe('Employee', () => {
             expect(id).toEqual(newId);
         });
     });
-
+    // tests individual method, getEmail
     describe('getEmail', () => {
         it('should return an employee email', () => {
             const email = 'test@test.com';
@@ -52,7 +55,7 @@ describe('Employee', () => {
             expect(email).toEqual(newEmail);
         });
     });
-
+    // tests individual method, getRole
     describe('getRole', () => {
         it('should return employee role', () => {
             const role = 'Employee';
