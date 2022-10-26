@@ -7,13 +7,21 @@
 .jumbotron {
     background-color: var(--red);
     color: white;
+    text-align: center;
 }
-
+.row{
+    justify-content: center;
+}
 .card {
     background-color: var(--offwhite);
+    margin: 5px;
+    box-shadow: 3px 3px 3px grey;
+    padding:0;
+    
 }
 
 .card-header {
     background-color: var(--blue);
     color: white;
+    
 }
