@@ -25,7 +25,7 @@ describe('Engineer', () => {
 
     describe('getRole', () => {
         it('should return employee role', () => {
-            const role = 'Employee';
+            const role = 'Engineer';
 
             const newRole = new Engineer().getRole();
 
@@ -37,9 +37,9 @@ describe('Engineer', () => {
         it('should return employee github', () => {
             const github ='StyngerBee';
             
-            const newGithub = new Engineer().getGithub();
+            const newGithub = new Engineer(github).getGithub();
 
-            expect(github).toEqual(newGithub)
+            expect(github).toEqual(newGithub);
         });
     });
 });
