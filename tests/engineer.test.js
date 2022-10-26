@@ -35,9 +35,9 @@ describe('Engineer', () => {
     
     describe('getGithub', () => {
         it('should return employee github', () => {
-            const github ='StyngerBee';
+            const github = 'StyngerBee';
             
-            const newGithub = new Engineer(github).getGithub();
+            const newGithub = new Engineer('1','2','3', github).getGithub();
 
             expect(github).toEqual(newGithub);
         });
