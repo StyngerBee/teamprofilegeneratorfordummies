@@ -1,215 +1,168 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
-const Manager = require('./lib/manager.classes');
-const Engineer = require('./lib/engineer.classes');
-const Intern = require('./lib/intern.classes');
 
+const Manager = require('./lib/Manager.classes');
+const Engineer = require('./lib/Engineer.classes');
+const Intern = require('./lib/Intern.classes');
+
+const generateSite = require('./src/generate-html');
+
+const teamMembers = [];
+
+// Manager Questions
 const managerQuestions = [
-    {
+
+       {
         type: 'input',
-        message: `What is your manager's name?`,
+        message: 'What is your managers name?',
         name: 'managerName',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true
-    },
-    {
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+       },  
+       {
         type: 'input',
-        message:  `What is your manager's ID?`,
+        message: 'What is the managers employee ID number?',
         name: 'managerId',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true
-    },
-    {
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+       }, 
+       {
         type: 'input',
-        message: `What is your manager's email?`,
+        message: 'What is the managers email?',
         name: 'managerEmail',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true
-    },
-    {
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+      }, 
+      {
         type: 'input',
-        message: `What is your manager's office number?`,
+        message: 'What is the managers office number?',
         name: 'officeNumber',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true
-    },
-]
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+      },
 
-const employeeQuestions = [
-    {
+    ];
+
+// Employee Selection
+const employeeSelection = [
+      {
         type: 'list',
-        message: 'What position is your new team member?',
-        choices: ['Engineer', 'Intern', 'I do not have more members to add at this time'],
-        name: 'roleChoice'
-    },
-    {
-        type: 'input',
-        message:`What is your engineer's name?`,
-        name: 'engineerName',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true,
-        when: answers => answers.choice === 'Engineer'
-    },
-    {
-        type: 'input',
-        message:`What is your engineer's ID?`,
-        name: 'engineerId',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true,
-        when: answers => answers.choice === 'Engineer'
-    },
-    {
-        type: 'input',
-        message:`What is your engineer's email?`,
-        name: 'engineerEmail',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true,
-        when: answers => answers.choice === 'Engineer'
-    },
-    {
-        type: 'input',
-        message:`What is your engineer's Github username?`,
-        name: 'githubUsername',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true,
-        when: answers => answers.choice === 'Engineer'
-    },
-    {
-        type: 'input',
-        message:`What is your intern's name?`,
-        name: 'internName',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true,
-        when: answers => answers.choice === 'Intern'
-    },
-    {
-        type: 'input',
-        message:`What is your intern's ID?`,
-        name: 'internId',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true,
-        when: answers => answers.choice === 'Intern'
-    },
-    {
-        type: 'input',
-        message:`What is your intern's email?`,
-        name: 'internEmail',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true,
-        when: answers => answers.choice === 'Intern'
-    },
-    {
-        type: 'input',
-        message:`What school does your intern go to?`,
-        name: 'school',
-        validate: answer => (answer.length === 0) ? 'Please input a valid answer.' : true,
-        when: answers => answers.choice === 'Intern'
-    },
+        message: 'Please select which option you would like to continue with:',
+        name: 'menu',
+        choices: ['add an engineer', 'add an intern', 'finish building my team']
+      },
+      
+];
 
+// Engineer Questions
+const engineerQuestions = [
+    {
+        type: 'input',
+        message: 'What is your engineers name?',
+        name: 'engineerName',
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+       },  
+       {
+        type: 'input',
+        message: 'What is the engineers employee ID number?',
+        name: 'engineerId',
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+       }, 
+       {
+        type: 'input',
+        message: 'What is the engineers employee email?',
+        name: 'engineerEmail',
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+      }, 
+      {
+        type: 'input',
+        message: 'What is the engineers github?',
+        name: 'engineerGithub',
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+      },
 ]
 
-const init = async () => {
-    const data1 = await inquirer.prompt(managerQuestions);
-    let data2 = {};
-    let team = [];
+// Intern Questions
+const internQuestions = [
+    {
+        type: 'input',
+        message: 'What is your interns name?',
+        name: 'internName',
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+       },  
+       {
+        type: 'input',
+        message: 'What is the interns employee ID number?',
+        name: 'internId',
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+       }, 
+       {
+        type: 'input',
+        message: 'What is the interns email?',
+        name: 'internEmail',
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+      }, 
+      {
+        type: 'input',
+        message: 'What is the interns school?',
+        name: 'internSchool',
+        validate: (value) => {if(value){return true} else {return 'i need a value to continue'}}
+      },
+]
 
-    
-    // do {
-    //     data2 = await inquirer.prompt(employeeQuestions);
-    //     team.push(data2);
-    // } while (data2.choice !== 'I do not have more members to add at this time');
-    
-    fs.writeFile('./dist/index.html', generateHTML(generateManager(data1), generateEngineer(team), generateIntern(team)), err => err ? console.log(err) : console.log('Your file has been created.'));
+
+// Build team function
+function buildTeam() {
+    const fileName = 'team';
+    fs.writeFileSync(`./dist/${fileName}.html`, generateSite(teamMembers), 'utf-8');
 }
 
-const generateManager = (data) => {
-    const manager = new Manager(data.managerName, data.managerId, data.managerEmail, data.officeNumber);
-    return `<!----- Card 1 ----->         
-                    <div class="card col">
-                        <div class="card-header">
-                            ${manager.getName()}, ${manager.getRole()}
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group">
-                                <li class="list-group-item">ID: ${manager.getId()} </li>
-                                <li class="list-group-item">Email: ${manager.getEmail()}</li>
-                                <li class="list-group-item">Office Number: ${manager.officeNumber}</li>
-                            </ul>
-                        </div>
-                    </div>`
+// Intern function
+function promptIntern() {
+    inquirer.prompt(internQuestions)
+    .then(function(answers) {
+        const intern = new Intern(answers.internName, answers.internId, answers.internEmail, answers.internSchool);
+        teamMembers.push(intern);
+        promptMenu();
+    });
 }
 
-const generateEngineer = (arr) => {
-    let engineers = '';
-    for (member of arr) {
-        if (member.choice === 'Engineer') {
-            let engineer = new Engineer(member.engineerName, member.engineerId, member.engineerEmail, member.githubUsername);
-            engineers += `<!----- Card 2 ----->
-                                    <div class="card col">    
-                                        <div class="card-header">
-                                            ${engineer.getName()}, ${engineer.getRole()}
-                                        </div>
-                                        <div class="card-body">
-                                            <ul class="list-group">
-                                                <li class="list-group-item">ID: ${engineer.getId()}</li>
-                                                <li class="list-group-item">Email: ${engineer.getEmail()}</li>
-                                                <li class="list-group-item">GitHub: ${engineer.getGithub()}</li>
-                                            </ul>
-                                        </div>
-                                    </div>`
+
+// Engineer function
+function promptEngineer() {
+    inquirer.prompt(engineerQuestions)
+    .then(function(answers) {
+        const engineer = new Engineer(answers.engineerName, answers.engineerId, answers.engineerEmail, answers.engineerGithub);
+        teamMembers.push(engineer);
+        promptMenu();
+    });
+}
+
+
+
+// Employee selection function
+function promptMenu() {
+    inquirer.prompt(employeeSelection)
+    .then(function(userChoice) {
+        switch (userChoice.menu) {
+            case 'add an engineer':
+                promptEngineer();
+                break;
+            case 'add an intern':
+                promptIntern();
+                break;
+            default:
+                buildTeam();
         }
-    }
-    return engineers;
+    });
 }
 
-const generateIntern = (arr) => {
-    let interns = '';
-    for (member of arr) {
-        if (member.choice === 'Intern') {
-            let intern = new Intern(member.internName, member.internId, member.internEmail, member.school);
-            interns += `<!----- Card 3 ----->
-                                <div class="card col">
-                                    <div class="card-header">
-                                        ${intern.getName()}, ${intern.getRole()}
-                                    </div>
-                                    <div class="card-body">
-                                        <ul class="list-group">
-                                            <li class="list-group-item">ID: ${intern.getId()}</li>
-                                            <li class="list-group-item">Email: ${intern.getEmail()}</li>
-                                            <li class="list-group-item">School: ${intern.getSchool()}</li>
-                                        </ul>
-                                    </div>        
-                                </div>
 
-                            </div>`
-        }
-    }
-    return interns;
-}
-
-const generateHTML = (func1, func2, func3) => {
-    return `<!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Team Profile Generator</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="../dist/style.css">
-    </head>
-    <body>
-    <!----- Jumbotron ----->    
-        <div class="jumbotron jumbotron-fluid">
-            <div class="container">
-              <h1 class="display-4">My Team</h1>
-            </div>
-        </div>
-    <!----- Team Cards -----> 
-        <div class="d-flex justify-content-center"> 
-                <div class="row container-fluid">
-            ${func1}
-            
-            ${func2}
-            
-            ${func3}
-
-        </div>    
-            
-              
+// Manager function
+function promptManager() {
+    inquirer.prompt(managerQuestions)
+    .then(function(answers) {
+        const manager = new Manager(answers.managerName, answers.managerId, answers.managerEmail, answers.officeNumber);
+        teamMembers.push(manager);
+        promptMenu();
+    });
     
-        
-    </body>
-    </html>`
 }
 
-init();
+promptManager();
