@@ -8,6 +8,7 @@ function generateSite(team) {
         <div class="card col">
                         <div class="card-header">
                             ${manager.getName()}, ${manager.getRole()}
+                            <i class="fa-solid fa-people-roof"></i>
                         </div>
                         <div class="card-body">
                             <ul class="list-group">
@@ -27,6 +28,7 @@ function generateSite(team) {
         <div class="card col">    
                         <div class="card-header">
                             ${engineer.getName()}, ${engineer.getRole()}
+                            <i class="fa-solid fa-gears"></i>
                         </div>
                         <div class="card-body">
                             <ul class="list-group">
@@ -46,6 +48,7 @@ function generateSite(team) {
         <div class="card col">
                         <div class="card-header">
                             ${intern.getName()}, ${intern.getRole()}
+                            <i class="fa-solid fa-graduation-cap"></i>
                         </div>
                         <div class="card-body">
                             <ul class="list-group">
