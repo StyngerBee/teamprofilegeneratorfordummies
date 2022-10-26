@@ -1,12 +1,16 @@
+// requires that inquirer and fs be installed and used
 const inquirer = require('inquirer');
 const fs = require('fs');
 
+// pulls each subclass from their files
 const Manager = require('./lib/Manager.classes');
 const Engineer = require('./lib/Engineer.classes');
 const Intern = require('./lib/Intern.classes');
 
+// generates the html using generate-html.js code, this just calls that.
 const generateSite = require('./src/generate-html');
 
+// assigns team members into an array
 const teamMembers = [];
 
 // Manager Questions
