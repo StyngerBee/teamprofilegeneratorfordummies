@@ -98,12 +98,12 @@ const employeeQuestions = [
 ]
 
 const init = async () => {
-    const data1 = await prompt(managerQuestions);
+    const data1 = await inquirer.prompt(managerQuestions);
     let data2 = {};
     let team = [];
 
     do {
-        data2 = await prompt(employeeQuestions);
+        data2 = await inquirer.prompt(employeeQuestions);
         team.push(data2);
     } while (data2.choice !== 'I do not have more members to add at this time');
     fs.writeFile('./dist/index.html', generateHTML(generateManager(data1), generateEngineer(team), generateIntern(team)), err => err ? console.log(err) : console.log('Your file has been created.'));
