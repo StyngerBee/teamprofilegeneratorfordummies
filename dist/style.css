@@ -1,0 +1,19 @@
+:root {
+    --red: rgb(235, 79, 79);
+    --blue: rgb(0, 110, 255);
+    --offwhite: rgb(243, 241, 241);
+}
+
+.jumbotron {
+    background-color: var(--red);
+    color: white;
+}
+
+.card {
+    background-color: var(--offwhite);
+}
+
+.card-header {
+    background-color: var(--blue);
+    color: white;
+}
