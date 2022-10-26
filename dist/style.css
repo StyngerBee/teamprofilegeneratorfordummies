@@ -1,21 +1,23 @@
+/* Assigns variables to specific colors to match mock up */
 :root {
     --red: rgb(235, 79, 79);
     --blue: rgb(0, 110, 255);
     --offwhite: rgb(243, 241, 241);
 }
-
+/* Changes jumbotron color to red */
 .jumbotron {
     background-color: var(--red);
     color: white;
     text-align: center;
 }
+
 .row{
     justify-content: center;
 }
 .card {
     background-color: var(--offwhite);
-    margin: 5px;
-    box-shadow: 3px 3px 3px grey;
+    margin: 10px;
+    box-shadow: 10px 10px 10px grey;
     padding:0;
     
 }
