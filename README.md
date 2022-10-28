@@ -13,6 +13,8 @@
 
 ## Usage 
     While using this repo, after following the installation instructions, you can simply follow the prompts and answer the questions given to you in the command line. 
+
+![](images/2022-10-28%2015-29-42.mkv)
 ### Testing
     In order to run tests, you can simply type 'npm test' in the command line or terminal in order to run the tests designed by the developer. You can also insert invalid arguments as input to see if it continues to run
 ## Installation
